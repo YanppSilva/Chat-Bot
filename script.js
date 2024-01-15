@@ -16,7 +16,7 @@ const createChatLi = (message, className) => {
   return chatLi;
 }
 
-const generateResponse = (incomingChatLi) => {
+const generateResponse = async (incomingChatLi) => {
   const API_URL = 'https://api.openai.com/v1/chat/completions';
   const messageElement = incomingChatLi.querySelector('p');
 
@@ -32,7 +32,7 @@ const generateResponse = (incomingChatLi) => {
     })
   }
   // Manda uma requisição POST para API e obtem resposta. 
-  fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+  await fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
     messageElement.textContent = data.choices[0].message.content;
   }).catch((error) => {
     messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
