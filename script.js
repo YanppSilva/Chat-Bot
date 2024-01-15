@@ -14,8 +14,9 @@ const createChatLi = (message, className) => {
   return chatLi
 }
 
-const generateResponse = () => {
+const generateResponse = (incomingChatLi) => {
   const API_URL = 'https://api.openai.com/v1/chat/completions';
+  const messageElement = incomingChatLi.querySelector('p');
 
   const requestOptions = {
     method: 'POST',
@@ -30,9 +31,9 @@ const generateResponse = () => {
   }
   // Manda uma requisição POST para API e obtem resposta. 
   fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
-    console.log(data);
+    messageElement.textContent = data.choices[0].message.content;
   }).catch((error) => {
-    console.log(error);
+    messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
   })
 }
 
@@ -45,8 +46,9 @@ const handleChat = () => {
 
   setTimeout(() => {
     // Mostra a mensagem "Processando..." enquanto espera pela resposta do bot.
-    chatbox.appendChild(createChatLi('Processando...', 'incoming'));
-    generateResponse();
+    const incomingChatLi = creatChatLi('Processando...', 'incoming')
+    chatbox.appendChild(incomingChatLi);
+    generateResponse(incomingChatLi);
   }, 600);
 }
 
