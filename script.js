@@ -4,7 +4,7 @@ const chatbox = document.querySelector('.chatbox');
 const chatBotToggler = document.querySelector('.chatbot-toggler');
 
 let userMessage;
-const API_KEY = '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';
+const API_KEY = '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';
 
 const createChatLi = (message, className) => {
   // Cria um elemento de chat <li> com a menssagem passada e a classe.
