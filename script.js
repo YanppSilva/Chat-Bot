@@ -9,7 +9,7 @@ const createChatLi = (message, className) => {
   // Cria um elemento de chat <li> com a menssagem passada e a classe.
   const chatLi = document.createElement('li');
   chatLi.classList.add('chat', className);
-  let chatContent = className === 'outgoing' ? `<p>${message}</p>` : `<p>${message}</p><span class="material-symbols-outlined">smart_toy</span>`;
+  let chatContent = className === 'outgoing' ? `<p>${message}</p>` : `<span class="material-symbols-outlined">smart_toy</span><p>${message}</p>`;
   chatLi.innerHTML = chatContent;
   return chatLi
 }
@@ -46,7 +46,7 @@ const handleChat = () => {
 
   setTimeout(() => {
     // Mostra a mensagem "Processando..." enquanto espera pela resposta do bot.
-    const incomingChatLi = creatChatLi('Processando...', 'incoming')
+    const incomingChatLi = createChatLi('Processando...', 'incoming')
     chatbox.appendChild(incomingChatLi);
     generateResponse(incomingChatLi);
   }, 600);
