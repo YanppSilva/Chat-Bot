@@ -31,45 +31,33 @@ const generateResponse = async (incomingChatLi) => {
       "messages": [
         {
           "role": "user",
-          "content": "oi"
+          "content": userMessage
         }
       ]
     }),
     method: "POST",
     headers: {
       "content-type": "application/json",
-      Authorization: "Bearer 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",
+      "Authorization": `Bearer ${API_KEY}`,
     }
   };
 
-  // const requestOptions = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'aplication/json',
-  //     Authorization: `Bearer ${API_KEY}`,
-  //   },
-  //   body: JSON.stringify({
-  //     model: 'gpt-3.5-turbo',
-  //     messages: [{ role: 'user', content: userMessage }],
-  //   }),
-  // };
-  // Manda uma requisição POST para API e obtem resposta.
-  //await fetch(API_URL, requestOptions)
-  //  .then((res) => res.json())
-  //  .then((data) => {
-  //    messageElement.textContent = data.choices[0].message.content;
-  //  })
-  //  .catch((error) => {
-  //    messageElement.classList.add('error');
-  //    messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
-  //  })
-  //  .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+  await fetch(
+    API_URL,
+    requestOptions,
+  ).then(res => res.json()).then(data => {
+    messageElement.textContent = data.choices[0].message.content;
+  }).catch((error) => {
+    messageElement.classList.add('error');
+    messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
+  }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 };
 
 const handleChat = () => {
   userMessage = chatInput.value.trim();
   if (!userMessage) return;
   chatInput.value = '';
+  chatInput.style.height = `${inputInitHeight}px`;
 
   // Anexa a mensagem do usuário à caixa de bate-papo
   chatbox.appendChild(createChatLi(userMessage, 'outgoing'));
@@ -87,6 +75,13 @@ chatInput.addEventListener('input', () => {
   // Ajusta a altura do input baseado no conteúdo.
   chatInput.style.height = `${inputInitHeight}px`;
   chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+chatInput.addEventListener('keydown', (e) => {
+  // Se a tecla ENTER for pressionada sem o SHIFT e a tela for maior que 800px, ativa o chat.
+  if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    e.preventDefault();
+    handleChat();
+  }
 });
 sendChatBtn.addEventListener('click', handleChat);
 chatBotCloseBtn.addEventListener('click', () =>
