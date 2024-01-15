@@ -54,16 +54,16 @@ const generateResponse = async (incomingChatLi) => {
   //   }),
   // };
   // Manda uma requisição POST para API e obtem resposta.
-  await fetch(API_URL, requestOptions)
-    .then((res) => res.json())
-    .then((data) => {
-      messageElement.textContent = data.choices[0].message.content;
-    })
-    .catch((error) => {
-      messageElement.classList.add('error');
-      messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
-    })
-    .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
+  //await fetch(API_URL, requestOptions)
+  //  .then((res) => res.json())
+  //  .then((data) => {
+  //    messageElement.textContent = data.choices[0].message.content;
+  //  })
+  //  .catch((error) => {
+  //    messageElement.classList.add('error');
+  //    messageElement.textContent = 'Oops! Algo deu errado. Tente novamente';
+  //  })
+  //  .finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 };
 
 const handleChat = () => {

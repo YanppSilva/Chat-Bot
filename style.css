@@ -5,6 +5,8 @@
   --white-color: #FFF;
   --main-color: #304D30;
   --second-color: #B6C4B6;
+  --error-color: #721C24;
+  --error-second-color: #F8D7DA;
 }
 
 * {
@@ -37,6 +39,10 @@ body {
   color: var(--white-color);
   background: var(--main-color);
   border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
 }
 .chatbot-toggler span {
   position: absolute;
@@ -59,8 +65,10 @@ body {
   overflow-y: hidden;
   background: var(--white-color);
   border-radius: 15px;
+  transform-origin:  bottom right;
   box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
     0 32px 64px -48px rgba(0, 0, 0, 0.5);
+  transition: all 0.1s ease;
 }
 
 .show-chatbot .chatbot {
@@ -124,7 +132,10 @@ body {
   border-radius: 10px 10px 0 10px;
   background: var(--main-color);
 }
-
+.chatbox .chat p.error {
+  color: var(--error-color);
+  background-color: var(--error-second-color);
+}
 .chatbox .incoming p {
   color: #000;
   background: var(--second-color);
